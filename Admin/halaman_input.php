@@ -29,24 +29,16 @@ if(isset($_POST['simpan'])){
 <div class="mb-3 row">
     <a href="halaman.php"><< kembali ke halaman admin</a> 
 
-<?php
-if($error):
-?>
+<?php if($error): ?>
     <div class="alert alert-danger" role="alert">
         <?php echo $error ?>
     </div>
-<?php
-endif;
-?>
-<?php
-if($succes):
-?>
+<?php endif; ?>
+<?php if($succes): ?>
     <div class="alert alert-primary" role="alert">
         <?php echo $succes ?>
     </div>
-<?php
-endif;
-?>
+<?php endif; ?>
 
 <form action="" method="post">
     <div class="mb-3 row">
