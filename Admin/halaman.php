@@ -1,7 +1,24 @@
 <?php include("inc_header.php")?> 
 
 <?php
+    $sukses = "";
+    $error = "";
     $katakunci = (isset($_GET['katakunci']))?$_GET['katakunci']:"";
+    if(isset($_GET['op'])){
+        $op = $_GET['op'];
+    }else{
+        $op = "";
+    }
+    if($op == 'delete'){
+        $id = $_GET['id'];
+        $sql1 = "delete from penjualan where id_faktur = '$id'";
+        $q1 = mysqli_query($koneksi,$sql1);
+        if($q1){
+            $sukses = "Berhasil menghapus";
+        }else{
+            $error = "gagal menghapus";
+        }
+    }
 ?>
 
 <h1>Halaman Admin</h1>
@@ -10,6 +27,17 @@
         <input type="button" class="btn btn-primary" value="Buat Halaman Baru"/>
     <a>
 </p>
+
+<?php if($sukses): ?>
+    <div class="alert alert-primary" role="alert">
+        <?php echo $sukses ?>
+    </div>
+<?php endif; ?>
+<?php if($error): ?>
+    <div class="alert alert-danger" role="alert">
+        <?php echo $error ?>
+    </div>
+<?php endif; ?>
 
 <form class="row g-3" method="get">
     <div class="col-auto">
@@ -57,8 +85,8 @@
             <td>
                 <span class="badge text-bg-warning">Edit</span>
 
-                <a href="halaman.php?">
-                <span class="badge text-bg-danger">Delate</span>
+                <a href="halaman.php?op=delete&id=<?= $r1['id_faktur']?>" onclick="return confirm('Konfirmasi penghapusan?')">
+                <span class="badge text-bg-danger">Delete</span>
             </td>
         </tr>
         <?php
