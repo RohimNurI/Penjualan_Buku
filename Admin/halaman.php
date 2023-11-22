@@ -57,7 +57,7 @@
             <th>ID Pelanggan</th>
             <th>ID Buku</th>
             <th>Tanggal Pembelian</th>
-            <th class="col-2">aksi</th>
+            <th class="col-2"></th>
         </tr>
     </thead>
     <tbody>
