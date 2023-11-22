@@ -15,8 +15,6 @@
         $q1 = mysqli_query($koneksi,$sql1);
         if($q1){
             $sukses = "Berhasil menghapus";
-        }else{
-            $error = "gagal menghapus";
         }
     }
 ?>
@@ -31,11 +29,6 @@
 <?php if($sukses): ?>
     <div class="alert alert-primary" role="alert">
         <?php echo $sukses ?>
-    </div>
-<?php endif; ?>
-<?php if($error): ?>
-    <div class="alert alert-danger" role="alert">
-        <?php echo $error ?>
     </div>
 <?php endif; ?>
 
