@@ -6,8 +6,8 @@
  $error             ="";
  $succes            ="";
 
- if(isset($_GET['id_faktur'])){
-    $id = $_GET['id_faktur'];
+ if(isset($_GET['id'])){
+    $id = $_GET['id'];
  }else{
     $id = "";
  }
@@ -33,7 +33,7 @@ if(isset($_POST['simpan'])){
     }
     if(empty($error)){
         if($id != ""){
-            $sql1 = "update penjualan set id_pelanggan ='$id_pelanggan', id_buku = '$id_buku', tgl_pembelian=now() where id ='$id'";
+            $sql1 = "update penjualan set id_pelanggan='$id_pelanggan', id_buku='$id_buku', tgl_pembelian=now() where id ='$id'";
         }else{
             $sql1 ="insert into penjualan (id_pelanggan,id_buku) values ('$id_pelanggan','$id_buku')";
         }
