@@ -6,6 +6,24 @@
  $error             ="";
  $succes            ="";
 
+ if(isset($_GET['id'])){
+    $id = $_GET['id'];
+ }else{
+    $id = "";
+ }
+
+ if($id !=""){
+    $sql1 = "select * from penjualan where id_faktur = '$id'";
+    $q1 = mysqli_query($koneksi, $sql1);
+    $r1 = mysqli_fetch_array($q1);
+    $id_pelanggan = $r1['id_pelanggan'];
+    $id_buku = $r1['id_buku'];
+
+    if($id_pelanggan == ''){
+        $error = "data tidak ditemukan";
+    }
+ }
+
 if(isset($_POST['simpan'])){
     $id_pelanggan      =$_POST['id_pelanggan'];
     $id_buku           =$_POST['id_buku'];
@@ -14,7 +32,12 @@ if(isset($_POST['simpan'])){
         $error = "Silahkan mengisi data yang kosong";
     }
     if(empty($error)){
-        $sql1 ="insert into penjualan (id_pelanggan,id_buku) values ('$id_pelanggan','$id_buku')";
+        if($id != ""){
+            $sql1 = "update penjualan set id_pelanggan='$id_pelanggan', id_buku='$id_buku', tgl_pembelian=now() where id ='$id'";
+        }else{
+            $sql1 ="insert into penjualan (id_pelanggan,id_buku) values ('$id_pelanggan','$id_buku')";
+        }
+
         $q1 = mysqli_query($koneksi,$sql1);
         if($q1){
             $succes ="Berhasil memasukan data";
@@ -29,24 +52,16 @@ if(isset($_POST['simpan'])){
 <div class="mb-3 row">
     <a href="halaman.php"><< kembali ke halaman admin</a> 
 
-<?php
-if($error):
-?>
+<?php if($error): ?>
     <div class="alert alert-danger" role="alert">
         <?php echo $error ?>
     </div>
-<?php
-endif;
-?>
-<?php
-if($succes):
-?>
+<?php endif; ?>
+<?php if($succes): ?>
     <div class="alert alert-primary" role="alert">
         <?php echo $succes ?>
     </div>
-<?php
-endif;
-?>
+<?php endif; ?>
 
 <form action="" method="post">
     <div class="mb-3 row">
