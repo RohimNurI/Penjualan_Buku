@@ -2,7 +2,6 @@
 
 <?php
     $sukses = "";
-    $error = "";
     $katakunci = (isset($_GET['katakunci']))?$_GET['katakunci']:"";
     if(isset($_GET['op'])){
         $op = $_GET['op'];
@@ -76,6 +75,7 @@
             <td><?php echo $r1['id_buku']?></td>
             <td><?php echo $r1['tgl_pembelian']?></td>
             <td>
+                <a href="halaman_input.php?id=<?= $r1['id_faktur']?>" >
                 <span class="badge text-bg-warning">Edit</span>
 
                 <a href="halaman.php?op=delete&id=<?= $r1['id_faktur']?>" onclick="return confirm('Konfirmasi penghapusan?')">

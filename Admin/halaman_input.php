@@ -6,6 +6,24 @@
  $error             ="";
  $succes            ="";
 
+ if(isset($_GET['id_faktur'])){
+    $id = $_GET['id_faktur'];
+ }else{
+    $id = "";
+ }
+
+ if($id !=""){
+    $sql1 = "select * from penjualan where id_faktur = '$id'";
+    $q1 = mysqli_query($koneksi, $sql1);
+    $r1 = mysqli_fetch_array($q1);
+    $id_pelanggan = $r1['id_pelanggan'];
+    $id_buku = $r1['id_buku'];
+
+    if($id_pelanggan == ''){
+        $error = "data tidak ditemukan";
+    }
+ }
+
 if(isset($_POST['simpan'])){
     $id_pelanggan      =$_POST['id_pelanggan'];
     $id_buku           =$_POST['id_buku'];
@@ -14,7 +32,12 @@ if(isset($_POST['simpan'])){
         $error = "Silahkan mengisi data yang kosong";
     }
     if(empty($error)){
-        $sql1 ="insert into penjualan (id_pelanggan,id_buku) values ('$id_pelanggan','$id_buku')";
+        if($id != ""){
+            $sql1 = "update penjualan set id_pelanggan ='$id_pelanggan', id_buku = '$id_buku', tgl_pembelian=now() where id ='$id'";
+        }else{
+            $sql1 ="insert into penjualan (id_pelanggan,id_buku) values ('$id_pelanggan','$id_buku')";
+        }
+
         $q1 = mysqli_query($koneksi,$sql1);
         if($q1){
             $succes ="Berhasil memasukan data";
