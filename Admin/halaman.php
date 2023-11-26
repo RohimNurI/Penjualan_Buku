@@ -55,7 +55,7 @@
     <tbody>
         <?php
         $sqltambahan = "";
-        $per_halaman = 10;
+        $per_halaman = 2;
         if($katakunci !=''){
             $array_katakunci = explode(" ", $katakunci);
             for($x=0;$x < count($array_katakunci);$x++){
@@ -64,7 +64,7 @@
             $sqltambahan = " where ".implode(" or ", $sqlcari);
         }
         $sql1 ="select * from penjualan $sqltambahan";
-        $page = isset($_GET['page'])?(int)$_GET['get']:1;
+        $page = isset($_GET['page'])?(int)$_GET['page']:1;
         $mulai = ($page > 1) ? ($page * $per_halaman) - $per_halaman : 0;
         $q1 = mysqli_query($koneksi,$sql1);
         $total = mysqli_num_rows($q1);
@@ -98,8 +98,8 @@
 <nav aria-label="Page Navigation Example">
         <ul class="pagination">
             <?php
-            $cari = isset($_GET['cari'])?$_GET['cari']:"";
-            for($i=1; $i<= $pages; $i++){
+            $cari = (isset($_GET['cari']))?$_GET['cari']:"";
+            for($i=1; $i<=$pages; $i++){
             ?>
             <li class="page-item">
                 <a class="page-link" href="halaman.php?katakunci=<?=$katakunci?>&cari=<?=$cari?>&$page<?=$i?>"><?=$i?></a>
@@ -109,4 +109,5 @@
             ?>
         </ul>
 </nav>
+
 <?php include("inc_footer.php")?>
