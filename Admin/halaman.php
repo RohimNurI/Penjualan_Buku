@@ -21,7 +21,7 @@
 <h1>Halaman Admin</h1>
 <p>
     <a href="halaman_input.php">
-        <input type="button" class="btn btn-primary" value="Buat Halaman Baru"/>
+        <input type="button" class="btn btn-primary" value="Input Data Baru"/>
     <a>
 </p>
 
@@ -55,7 +55,7 @@
     <tbody>
         <?php
         $sqltambahan = "";
-        $per_halaman = 2;
+        $per_halaman = 3;
         if($katakunci !=''){
             $array_katakunci = explode(" ", $katakunci);
             for($x=0;$x < count($array_katakunci);$x++){
@@ -96,18 +96,19 @@
 </table>
 
 <nav aria-label="Page Navigation Example">
-        <ul class="pagination">
-            <?php
-            $cari = (isset($_GET['cari']))?$_GET['cari']:"";
-            for($i=1; $i<=$pages; $i++){
+    <ul class="pagination">
+        <?php
+        $cari = (isset($_GET['cari'])) ? $_GET['cari'] : "";
+        for ($i = 1; $i <= $pages; $i++) {
             ?>
-            <li class="page-item">
-                <a class="page-link" href="halaman.php?katakunci=<?=$katakunci?>&cari=<?=$cari?>&$page<?=$i?>"><?=$i?></a>
+            <li class="page-item <?php if ($i == $page) echo 'active'; ?>">
+                <a class="page-link" href="halaman.php?katakunci=<?= $katakunci ?>&cari=<?= $cari ?>&page=<?= $i ?>"><?= $i ?></a>
             </li>
             <?php
-            }
-            ?>
-        </ul>
+        }
+        ?>
+    </ul>
 </nav>
+
 
 <?php include("inc_footer.php")?>
