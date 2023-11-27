@@ -19,6 +19,9 @@
 ?>
 
 <h1>Halaman Admin</h1>
+
+<div class="container-fluid">
+
 <p>
     <a href="halaman_input.php">
         <input type="button" class="btn btn-primary" value="Input Data Baru"/>
@@ -82,11 +85,17 @@
             <td><?php echo $r1['id_buku']?></td>
             <td><?php echo $r1['tgl_pembelian']?></td>
             <td>
-                <a href="halaman_input.php?id=<?= $r1['id_faktur']?>" >
-                <span class="badge text-bg-warning">Edit</span>
+                <span class="badge text-bg-warning">
+                <a href="halaman_input.php?id=<?= $r1['id_faktur']?>"  class="text-decoration-none text-light" >
+                        Edit
+                </a>
+                </span>
 
-                <a href="halaman.php?op=delete&id=<?= $r1['id_faktur']?>" onclick="return confirm('Konfirmasi penghapusan?')">
-                <span class="badge text-bg-danger">Delete</span>
+                <span class="badge text-bg-danger">
+                <a href="halaman.php?op=delete&id=<?= $r1['id_faktur']?>" onclick="return confirm('Konfirmasi penghapusan?')"  class="text-decoration-none text-light">
+                        Delete
+                    </a>
+                </span>
             </td>
         </tr>
         <?php
@@ -110,5 +119,5 @@
     </ul>
 </nav>
 
-
+</div>
 <?php include("inc_footer.php")?>
