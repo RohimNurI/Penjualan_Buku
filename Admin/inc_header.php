@@ -24,7 +24,7 @@ include 'C:/xampp\htdocs/Kuliah/Basis Data/Tugas Besar 1/inc/inc_koneksi.php';
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="halaman.php">Home</a>
             </li>
             <li class="nav-item">
             <a class="nav-link active" href="#">Input Data</a>
@@ -42,7 +42,7 @@ include 'C:/xampp\htdocs/Kuliah/Basis Data/Tugas Besar 1/inc/inc_koneksi.php';
              </ul>
             </li>
             <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            <a class="nav-link active" aria-current="page" href="#" >Logout</a>
             </li>
         </ul>
         <form class="d-flex" role="search">

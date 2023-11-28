@@ -58,7 +58,7 @@
     <tbody>
         <?php
         $sqltambahan = "";
-        $per_halaman = 3;
+        $per_halaman = 10;
         if($katakunci !=''){
             $array_katakunci = explode(" ", $katakunci);
             for($x=0;$x < count($array_katakunci);$x++){
