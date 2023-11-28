@@ -34,7 +34,7 @@ include 'C:/xampp\htdocs/Kuliah/Basis Data/Tugas Besar 1/inc/inc_koneksi.php';
                 Database
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Data Pelanggan</a></li>
+                <li><a class="dropdown-item" href="halaman_dbpelanggan.php">Data Pelanggan</a></li>
                 <li><a class="dropdown-item" href="#">Data Buku</a></li>
                 <li><a class="dropdown-item" href="#">Data Penjualan</a></li>
                 <li><hr class="dropdown-divider"></li>
