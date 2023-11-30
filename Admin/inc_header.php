@@ -26,29 +26,18 @@ include 'C:/xampp\htdocs/Kuliah/Basis Data/Tugas Besar 1/inc/inc_koneksi.php';
             <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="halaman.php">Home</a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link active" href="#">Input Data</a>
-            </li>
             <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Database
             </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="halaman_dbpelanggan.php">Data Pelanggan</a></li>
-                <li><a class="dropdown-item" href="#">Data Buku</a></li>
-                <li><a class="dropdown-item" href="#">Data Penjualan</a></li>
-                <li><hr class="dropdown-divider"></li>
-               <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="halaman_dbbuku.php">Data Buku</a></li>
              </ul>
-            </li>
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" >Logout</a>
+            <a class="nav-link active" aria-current="page" href="logout.php">Logout</a>
             </li>
         </ul>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
         </div>
     </div>
     </nav>  

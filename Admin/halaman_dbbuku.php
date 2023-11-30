@@ -10,7 +10,7 @@
     }
     if($op == 'delete'){
         $id = $_GET['id'];
-        $sql1 = "delete from pelanggan where id_pelanggan = '$id'";
+        $sql1 = "delete from buku where id_buku = '$id'";
         $q1 = mysqli_query($koneksi,$sql1);
         if($q1){
             $sukses = "Berhasil menghapus";
@@ -22,7 +22,7 @@
 
 <div class="container-fluid">
 <p>
-    <a href="halaman_input_pelanggan.php">
+    <a href="halaman_input_buku.php">
         <input type="button" class="btn btn-primary" value="Input Data Baru"/>
     <a>
 </p>
@@ -47,9 +47,10 @@
     <thead>
         <tr>
             <th class="col-1">#</th>
-            <th>ID Pelanggan</th>
-            <th>Nama Pelanggan</th>
-            <th>Alamat</th>
+            <th>ID Buku</th>
+            <th>Nama Buku</th>
+            <th>Kategori Buku</th>
+            <th>Harga</th>
             <th class="col-2"></th>
         </tr>
     </thead>
@@ -60,30 +61,31 @@
         if($katakunci !=''){
             $array_katakunci = explode(" ", $katakunci);
             for($x=0;$x < count($array_katakunci);$x++){
-                $sqlcari[] = "(id_pelanggan like '%".$array_katakunci[$x]."%' || nama_pelanggan like '%".$array_katakunci[$x]."%' || alamat like '%".$array_katakunci[$x]."%')";
+                $sqlcari[] = "(id_buku like '%".$array_katakunci[$x]."%' || nama_buku like '%".$array_katakunci[$x]."%' || kategori_buku like '%".$array_katakunci[$x]."%' || harga like '%".$array_katakunci[$x]."%')";
             }
             $sqltambahan = " where ".implode(" or ", $sqlcari);
         }
-        $sql1 ="select * from pelanggan $sqltambahan";
+        $sql1 ="select * from buku $sqltambahan";
         $page = isset($_GET['page'])?(int)$_GET['page']:1;
         $mulai = ($page > 1) ? ($page * $per_halaman) - $per_halaman : 0;
         $q1 = mysqli_query($koneksi,$sql1);
         $total = mysqli_num_rows($q1);
         $pages = ceil($total / $per_halaman);
         $nomer = $mulai + 1;
-        $sql1 = $sql1."order by id_pelanggan desc limit $mulai,$per_halaman";
+        $sql1 = $sql1."order by id_buku desc limit $mulai,$per_halaman";
 
         $q1 = mysqli_query($koneksi, $sql1);
         while($r1 = mysqli_fetch_array($q1)){
         ?>
             <tr>
             <td><?php echo $nomer++?></td>
-            <td><?php echo $r1['id_pelanggan']?></td>
-            <td><?php echo $r1['nama_pelanggan']?></td>
-            <td><?php echo $r1['alamat']?></td>
+            <td><?php echo $r1['id_buku']?></td>
+            <td><?php echo $r1['nama_buku']?></td>
+            <td><?php echo $r1['kategori_buku']?></td>
+            <td><?php echo $r1['harga']?></td>
             <td>
                 <span class="badge text-bg-danger">
-                <a href="halaman_dbpelanggan.php?op=delete&id=<?= $r1['id_pelanggan']?>" onclick="return confirm('Konfirmasi penghapusan?')"  class="text-decoration-none text-light">
+                <a href="halaman_dbbuku.php?op=delete&id=<?= $r1['id_buku']?>" onclick="return confirm('Konfirmasi penghapusan?')"  class="text-decoration-none text-light">
                         Delete
                     </a>
                 </span>
@@ -102,7 +104,7 @@
         for ($i = 1; $i <= $pages; $i++) {
             ?>
             <li class="page-item <?php if ($i == $page) echo 'active'; ?>">
-                <a class="page-link" href="halaman_dbpelanggan.php?katakunci=<?= $katakunci ?>&cari=<?= $cari ?>&page=<?= $i ?>"><?= $i ?></a>
+                <a class="page-link" href="halaman_dbbuku.php?katakunci=<?= $katakunci ?>&cari=<?= $cari ?>&page=<?= $i ?>"><?= $i ?></a>
             </li>
             <?php
         }
