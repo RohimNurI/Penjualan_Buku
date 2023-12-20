@@ -1,11 +1,13 @@
 <?php include("inc_header.php"); ?>
 
 <?php
-$id_pelanggan = "";
-$nama_pelanggan = "";
-$alamat = "";
-$error = "";
-$success = "";
+$id_pelanggan   = "";
+$nama           = "";
+$alamat         = "";
+$email          = "";
+$nomertlp       = "";
+$error          = "";
+$success        = "";
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -15,12 +17,14 @@ if (isset($_GET['id'])) {
 
 if ($id != "") {
     $id = mysqli_real_escape_string($koneksi, $id);
-    $sql1 = "SELECT * FROM pelanggan WHERE id_pelanggan = '$id'";
+    $sql1 = "SELECT * FROM pelanggan WHERE ID_Pelanggan = '$id'";
     $q1 = mysqli_query($koneksi, $sql1);
     $r1 = mysqli_fetch_array($q1);
-    $id_pelanggan = $r1['id_pelanggan'];
-    $nama_pelanggan = $r1['nama_pelanggan'];
-    $alamat = $r1['alamat'];
+    $id_pelanggan = $r1['ID_Pelanggan'];
+    $nama = $r1['Nama'];
+    $alamat = $r1['Alamat'];
+    $email = $r1['Email'];
+    $nomertlp = $r1['Nomor_Telepon'];
 
     if ($id_pelanggan == '') {
         $error = "Data tidak ditemukan";
@@ -28,19 +32,20 @@ if ($id != "") {
 }
 
 if (isset($_POST['simpan'])) {
-    $id_pelanggan = $_POST['id_pelanggan'];
-    $nama_pelanggan = $_POST['nama_pelanggan'];
-    $alamat = $_POST['alamat'];
+    $nama           = $_POST['Nama'];
+    $alamat         = $_POST['Alamat'];
+    $email          = $_POST['Email'];
+    $nomertlp       = $_POST['Nomor_Telepon'];
 
-    if ($id_pelanggan == '' || $nama_pelanggan == '' || $alamat == '') {
+    if ($nama == '' || $alamat == '' || $email == '' || $nomertlp == '') {
         $error = "Silahkan mengisi data yang kosong";
     }
 
     if (empty($error)) {
         if ($id != "") {
-            $sql1 = "UPDATE pelanggan SET id_pelanggan='$id_pelanggan', nama_pelanggan='$nama_pelanggan', alamat='$alamat' WHERE id ='$id'";
+            $sql1 = "UPDATE pelanggan SET Nama='$nama', Alamat='$alamat', Email='$email', Nomor_Telepon='$nomertlp' WHERE ID_Pelanggan='$id'";
         } else {
-            $sql1 = "INSERT INTO pelanggan (id_pelanggan, nama_pelanggan, alamat) VALUES ('$id_pelanggan','$nama_pelanggan','$alamat')";
+            $sql1 = "INSERT INTO pelanggan (Nama, Alamat, Email, Nomor_Telepon) VALUES ('$nama','$alamat', '$email', '$nomertlp' )";
         }
 
         $q1 = mysqli_query($koneksi, $sql1);
@@ -53,7 +58,7 @@ if (isset($_POST['simpan'])) {
 }
 ?>
 
-<h1>Halaman Input Data</h1>
+<h1>Halaman Input Data Pelanggan</h1>
 <div class="mb-3 row">
     <a href="halaman_dbpelanggan.php"><< kembali ke halaman data pelanggan</a>
 
@@ -70,21 +75,27 @@ if (isset($_POST['simpan'])) {
 
     <form action="" method="post">
         <div class="mb-3 row">
-            <label for="id_pelanggan" class="col-sm-2 col-form-label">ID Pelanggan</label>
+            <label for="Nama" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_pelanggan" value="<?php echo $id_pelanggan ?>" name="id_pelanggan">
+                <input type="text" class="form-control" id="Nama" value="<?php echo $nama ?>" name="Nama">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="nama_pelanggan" class="col-sm-2 col-form-label">Nama Pelanggan</label>
+            <label for="Alamat" class="col-sm-2 col-form-label">Alamat</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nama_pelanggan" value="<?php echo $nama_pelanggan ?>" name="nama_pelanggan">
+                <input type="text" class="form-control" id="Alamat" value="<?php echo $alamat ?>" name="Alamat">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="alamat" class="col-sm-2 col-form-label">alamat</label>
+            <label for="Email" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="alamat" value="<?php echo $alamat ?>" name="alamat">
+                <input type="text" class="form-control" id="Email" value="<?php echo $email ?>" name="Email">
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Nomor_Telepon" class="col-sm-2 col-form-label">Nomer Telepon</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Nomor_Telepon" value="<?php echo $nomertlp ?>" name="Nomor_Telepon">
             </div>
         </div>
         <div class="mb-3 row">

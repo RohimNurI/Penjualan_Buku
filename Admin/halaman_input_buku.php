@@ -1,12 +1,14 @@
 <?php include("inc_header.php"); ?>
 
 <?php
-$id_buku = "";
-$nama_buku = "";
-$kategori_buku = "";
-$harga = "";
-$error = "";
-$success = "";
+$id_buku    = "";
+$judul      = "";
+$penulis    = "";
+$penerbit   = "";
+$harga      = "";
+$stok       = "";
+$error      = "";
+$success    = "";
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -16,13 +18,15 @@ if (isset($_GET['id'])) {
 
 if ($id != "") {
     $id = mysqli_real_escape_string($koneksi, $id);
-    $sql1 = "SELECT * FROM buku WHERE id_buku = '$id'";
+    $sql1 = "SELECT * FROM buku WHERE ID_Buku = '$id'";
     $q1 = mysqli_query($koneksi, $sql1);
     $r1 = mysqli_fetch_array($q1);
-    $id_buku = $r1['id_buku'];
-    $nama_buku = $r1['nama_buku'];
-    $kategori_buku = $r1['kategori_buku'];
-    $harga = $r1['harga'];
+    $id_buku = $r1['ID_Buku'];
+    $judul = $r1['Judul'];
+    $penulis = $r1['Penulis'];
+    $penerbit = $r1['Penerbit'];
+    $harga = $r1['Harga'];
+    $stok = $r1['Stok'];
 
     if ($id_buku == '') {
         $error = "Data tidak ditemukan";
@@ -30,20 +34,21 @@ if ($id != "") {
 }
 
 if (isset($_POST['simpan'])) {
-    $id_buku = $_POST['id_buku'];
-    $nama_buku = $_POST['nama_buku'];
-    $kategori_buku = $_POST['kategori_buku'];
-    $harga = $_POST['harga'];
+    $judul      = $_POST['Judul'];
+    $penulis    = $_POST['Penulis'];
+    $penerbit   = $_POST['Penerbit'];
+    $harga      = $_POST['Harga'];
+    $stok       = $_POST['Stok'];
 
-    if ($id_buku == '' || $nama_buku == '' || $kategori_buku == '' || $harga == ''){
+    if ($judul == '' || $penulis == '' || $penerbit == '' || $harga == '' || $stok == ''){
         $error = "Silahkan mengisi data yang kosong";
     }
 
     if (empty($error)) {
         if ($id != "") {
-            $sql1 = "UPDATE buku SET id_buku='$id_buku', nama_buku='$nama_buku', kategori_buku='$kategori_buku', harga='$harga' WHERE id ='$id'";
+            $sql1 = "UPDATE buku SET Judul='$judul', Penulis='$penulis', Penerbit='$penerbit', Harga='$harga', Stok='$stok' WHERE id ='$id'";
         } else {
-            $sql1 = "INSERT INTO buku (id_buku, nama_buku, kategori_buku, harga) VALUES ('$id_buku','$nama_buku','$kategori_buku','$harga')";
+            $sql1 = "INSERT INTO buku (Judul, Penulis, Penerbit, Harga, Stok) VALUES ('$judul','$penulis','$penerbit','$harga', '$stok')";
         }
 
         $q1 = mysqli_query($koneksi, $sql1);
@@ -73,27 +78,35 @@ if (isset($_POST['simpan'])) {
 
     <form action="" method="post">
         <div class="mb-3 row">
-            <label for="id_buku" class="col-sm-2 col-form-label">ID Buku</label>
+            <label for="Judul" class="col-sm-2 col-form-label">Judul</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_buku" value="<?php echo $id_buku ?>" name="id_buku">
+                <input type="text" class="form-control" id="Judul" value="<?php echo $judul ?>" name="Judul">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="nama_buku" class="col-sm-2 col-form-label">Nama Buku</label>
+            <label for="Penulis" class="col-sm-2 col-form-label">Penulis</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nama_buku" value="<?php echo $nama_buku ?>" name="nama_buku">
+                <input type="text" class="form-control" id="Penulis" value="<?php echo $penulis ?>" name="Penulis">
             </div>
         </div>
         <div class="mb-3 row">
-            <label for="kategori_buku" class="col-sm-2 col-form-label">Kategori Buku</label>
+            <label for="Penerbit" class="col-sm-2 col-form-label">Penerbit</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="kategori_buku" value="<?php echo $kategori_buku ?>" name="kategori_buku">
+                <input type="text" class="form-control" id="Penerbit" value="<?php echo $penerbit ?>" name="Penerbit">
             </div>
         </div>
+        </div>
         <div class="mb-3 row">
-            <label for="harga" class="col-sm-2 col-form-label">Harga Buku</label>
+            <label for="Harga" class="col-sm-2 col-form-label">Harga</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="harga" value="<?php echo $harga ?>" name="harga">
+                <input type="text" class="form-control" id="Harga" value="<?php echo $harga ?>" name="Harga">
+            </div>
+        </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="Stok" class="col-sm-2 col-form-label">Stok</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Stok" value="<?php echo $stok ?>" name="Stok">
             </div>
         </div>
         <div class="mb-3 row">

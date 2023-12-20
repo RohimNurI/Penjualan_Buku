@@ -1,8 +1,11 @@
 <?php include("inc_header.php")?> 
 
 <?php
- $id_pelanggan      ="";
+ $id_detail         ="";
+ $id_penjualan      ="";
  $id_buku           ="";
+ $jumlah            ="";
+ $tharga            ="";
  $error             ="";
  $succes            ="";
 
@@ -13,29 +16,34 @@
  }
 
  if($id !=""){
-    $sql1 = "select * from penjualan where id_faktur = '$id'";
+    $sql1 = "select * from detail_penjualan where ID_Detail = '$id'";
     $q1 = mysqli_query($koneksi, $sql1);
     $r1 = mysqli_fetch_array($q1);
-    $id_pelanggan = $r1['id_pelanggan'];
-    $id_buku = $r1['id_buku'];
+    $id_detail = $r1['ID_Detail'];
+    $id_penjualan = $r1['ID_Penjualan'];
+    $id_buku = $r1['ID_Buku'];
+    $jumlah = $r1['Jumlah_Beli'];
+    $tharga = $r1['Subtotal_Harga'];
 
-    if($id_pelanggan == ''){
+    if($id_detail == ''){
         $error = "data tidak ditemukan";
     }
  }
 
 if(isset($_POST['simpan'])){
-    $id_pelanggan      =$_POST['id_pelanggan'];
-    $id_buku           =$_POST['id_buku'];
+    $id_penjualan      =$_POST['ID_Penjualan'];
+    $id_buku           =$_POST['ID_Buku'];
+    $jumlah            =$_POST['Jumlah_Beli'];
+    $tharga            =$_POST['Subtotal_Harga'];
 
-    if($id_pelanggan == '' or $id_buku == ''){
+    if($id_penjualan == '' || $id_buku == '' || $jumlah == '' || $tharga == ''){
         $error = "Silahkan mengisi data yang kosong";
     }
     if(empty($error)){
         if($id != ""){
-            $sql1 = "update penjualan set id_pelanggan='$id_pelanggan', id_buku='$id_buku', tgl_pembelian=now() where id_faktur='$id'";
+            $sql1 = "UPDATE detail_penjualan SET ID_Penjualan='$id_penjualan', ID_Buku='$id_buku', Jumlah_Beli='$jumlah', Subtotal_Harga='$tharga' WHERE ID_Detail='$id'";
         }else{
-            $sql1 ="insert into penjualan (id_pelanggan,id_buku) values ('$id_pelanggan','$id_buku')";
+            $sql1 ="INSERT INTO detail_penjualan (ID_Penjualan,ID_Buku,Jumlah_Beli,Subtotal_Harga ) values ('$id_penjualan','$id_buku','$jumlah','$tharga')";
         }
 
         $q1 = mysqli_query($koneksi,$sql1);
@@ -65,15 +73,27 @@ if(isset($_POST['simpan'])){
 
 <form action="" method="post">
     <div class="mb-3 row">
-        <label for="id_pelanggan" class="col-sm-2 col-form-label">ID Pelanggan</label>
+        <label for="ID_Penjualan" class="col-sm-2 col-form-label">ID Penjualan</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="id_pelanggan" value="<?php echo $id_pelanggan?>" name="id_pelanggan">
+        <input type="text" class="form-control" id="ID_Penjualan" value="<?php echo $id_penjualan?>" name="ID_Penjualan">
         </div>
     </div>
     <div class="mb-3 row">
-        <label for="id_buku" class="col-sm-2 col-form-label">ID_Buku</label>
+        <label for="ID_Buku" class="col-sm-2 col-form-label">ID Buku</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="id_buku" value="<?php echo $id_buku?>" name="id_buku">
+        <input type="text" class="form-control" id="ID_Buku" value="<?php echo $id_buku?>" name="ID_Buku">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="Jumlah_Beli" class="col-sm-2 col-form-label">Jumlah Pembelian</label>
+        <div class="col-sm-10">
+        <input type="text" class="form-control" id="Jumlah_Beli" value="<?php echo $jumlah?>" name="Jumlah_Beli">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="Subtotal_Harga" class="col-sm-2 col-form-label">Total Harga</label>
+        <div class="col-sm-10">
+        <input type="text" class="form-control" id="Subtotal_Harga" value="<?php echo $tharga?>" name="Subtotal_Harga">
         </div>
     </div>
     <div class="mb-3 row">
